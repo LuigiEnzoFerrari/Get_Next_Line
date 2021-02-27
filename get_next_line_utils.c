@@ -68,7 +68,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	return (dest_len + src_len);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ptr;
 	size_t	s1_len;
@@ -83,6 +83,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	ft_strlcpy(ptr, s1, s1_len);
 	ft_strlcat(ptr, s2, total_len);
-	free(s1);
 	return (ptr);
 }
