@@ -1,12 +1,42 @@
-#include "get_next_line.h"
 #include <stdio.h> 
 #include <fcntl.h> 
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include "get_next_line.h"
 
-#define BUFFER_SIZE	25
+#define BUFFER_SIZE	5000
 #define BANANA		666
+
+char	*ft_strncpy(char *dest, const char *src, size_t num)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (src[i] && i < num)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < num)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
+}
+
+char    *ft_strnew(size_t size)
+{
+    char    *str;
+
+    if (!(str = (char *)malloc(sizeof(char) * size + 1)))
+        return (NULL);
+    str[size] = '\0';
+    while (size--)
+        str[size] = '\0';
+    return (str);
+}
 
 size_t	ft_strclen(const char *str, const char chr)
 {
@@ -65,31 +95,33 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 }
 
 
-
-
 int		get_next_line(int fd, char **line)
 {
-	char	buff[BUFFER_SIZE + 1];
+	static char	buff[BUFFER_SIZE + 1];
 	char	*temp;
-	static char	*conteiner;
-	size_t	read_len;
-	size_t	i;
+	char	*conteiner;
+	int		read_len;
 
-	if (!conteiner)
-		conteiner = ft_strdup("");
-	while ((read_len = read(fd, buff, BUFFER_SIZE) > 0))
+	conteiner = ft_strnew(1);
+	//printf(">:%s:< \n", buff);
+	if (!buff[0])
+		read_len = read(fd, buff, BUFFER_SIZE);
+	while (read_len > 0)
 	{
+		buff[read_len] = '\0';
 		temp = ft_strjoin(conteiner, buff);
 		free(conteiner);
 		conteiner = temp;
-		if (ft_strchr(temp, '\n'))
+		if (ft_strchr(buff, '\n'))
 		{
-			*line = ft_substr(temp, 0, ft_strclen(temp, '\n'));
+			*line = ft_substr(conteiner, 0, ft_strclen(conteiner, '\n'));
 			break;
 		}
-		i++;
+		read_len = read(fd, buff, BUFFER_SIZE);
+
 	}
-	
+	free(temp);
+	ft_strncpy(buff, ft_strchr(buff, '\n') + 1, read_len);
 	if (!read_len)
 		return (0);
 	return (BANANA);
@@ -109,8 +141,57 @@ int main (void)
 	fd = open("a.txt", O_RDONLY);//O_RDWR
 
 	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
 
-	printf("%s\n", line);
-	printf("%s\n", line);
+	close(fd);
 	return (0);
 }
