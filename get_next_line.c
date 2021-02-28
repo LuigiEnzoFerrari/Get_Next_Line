@@ -5,7 +5,7 @@
 #include <string.h>
 #include "get_next_line.h"
 
-#define BUFFER_SIZE	40
+#define BUFFER_SIZE	10
 #define FT_EOF		0
 #define BANANA		666
 
@@ -139,10 +139,12 @@ int		get_next_line(int fd, char **line)
 			free(temp);
 			return(0);
 		}
-
 	}
 	if (read_len == FT_EOF)
+	{
+		free(conteiner);
 		return (0);
+	}
 	free(temp);
 	ft_strncpy(buff, ft_strchr(buff, '\n') + 1, read_len);
 	return (BANANA);
@@ -152,18 +154,16 @@ int main (void)
 { 
 	char	*line;
 	int		fd;
-
 	int		get_next;
 	int		i;
 
 	i = 0;
 	get_next = 1;
 	fd = open("a.txt", O_RDONLY);//O_RDWR
-	while (get_next > 0)
+	while (get_next > FT_EOF)
 	{
 		get_next = get_next_line(fd, &line);
 		printf("%s\n", line);
-		free(line);
 	}
 /* 	get_next_line(fd, &line);
 	printf("%s\n", line);
