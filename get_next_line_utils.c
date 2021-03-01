@@ -80,8 +80,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	total_len = s2_len + s1_len;
 	ptr = (char *)malloc(sizeof(char) * (total_len));
 	if (!ptr)
+	{
+		free(s1);
 		return (0);
+	}
 	ft_strlcpy(ptr, s1, s1_len);
 	ft_strlcat(ptr, s2, total_len);
+	free(s1);
 	return (ptr);
 }
