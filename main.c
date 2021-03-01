@@ -6,15 +6,16 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:42:38 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/02/28 23:43:24 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/01 13:42:03 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "get_next_line.h"
+# include <fcntl.h> 
 
 int main (void) 
-{ 
+{
 	char	*line;
 	int		fd;
 	int		get_next;

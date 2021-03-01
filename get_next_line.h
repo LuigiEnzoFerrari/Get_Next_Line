@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:30:57 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/02/28 23:44:09 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/01 13:43:20 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
-# include <fcntl.h> 
 # include <string.h>
+# include <stdbool.h>
+# include <sys/resource.h>
 # include "get_next_line.h"
 
-# define BUFFER_SIZE	1
+# define BUFFER_SIZE	3
+# define FT_EOL			1
 # define FT_EOF			0
-# define BANANA			666
+# define FT_ERROR		-1
+# define FT_LIMIT_FD	RLIMIT_NOFILE
 
 int		get_next_line(int fd, char **line);
 void	*ft_memcpy(void *dest, const void *src, size_t num);

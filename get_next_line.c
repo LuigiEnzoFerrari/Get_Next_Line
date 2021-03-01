@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/02/28 23:40:58 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/01 13:01:41 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ int		get_next_line(int fd, char **line)
 	char		*conteiner;
 	static	int	read_len;
 
+	if (BUFFER_SIZE <=0 || read_len > BUFFER_SIZE
+	|| read_len < 0 || fd < 0 || fd > FT_LIMIT_FD)
+		return (-1);
 	conteiner = ft_strdup("");
 	if (!buff[0])
 		read_len = read(fd, buff, BUFFER_SIZE);
@@ -150,5 +153,5 @@ int		get_next_line(int fd, char **line)
 	}
 	ft_strcpy(buff, ft_strchr(buff, '\n') + 1);
 	free(conteiner);
-	return (BANANA);
+	return (FT_EOL);
 }
