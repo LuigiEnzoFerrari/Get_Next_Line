@@ -1,19 +1,34 @@
-#include<stdio.h> 
-#include<fcntl.h> 
-#include<unistd.h>
-#include<stdlib.h>
-#include<string.h>
-#define	BUFF	9
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/28 23:42:38 by lenzo-pe          #+#    #+#             */
+/*   Updated: 2021/02/28 23:43:24 by lenzo-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include "get_next_line.h"
+
 int main (void) 
 { 
-    int fd[2]; 
-    char buf2[BUFF]; 
-  
-    fd[1] = open("a.txt", O_RDWR);
+	char	*line;
+	int		fd;
+	int		get_next;
+	int		i;
 
-    write(1, buf2, read(fd[1], buf2, BUFF)); 
-  
-    close(fd[1]); 
-  
-    return 0; 
+	i = 0;
+	get_next = 1;
+	fd = open("a.txt", O_RDONLY);//O_RDWR
+	while (get_next > FT_EOF)
+	{
+		get_next = get_next_line(fd, &line);
+		printf("%s\n", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
 }

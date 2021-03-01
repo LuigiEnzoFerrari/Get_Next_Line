@@ -1,13 +1,17 @@
-#include <stdio.h> 
-#include <fcntl.h> 
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
+/*   Updated: 2021/02/28 23:40:58 by lenzo-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define BUFFER_SIZE	10
-#define FT_EOF		0
-#define BANANA		666
+#include <stdio.h>
+#include "get_next_line.h"
 
 void	*ft_memset(void *ptr, int c, size_t num)
 {
@@ -98,6 +102,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ptr;
 	size_t	s_len;
+
 	if (!s)
 		return (0);
 	s_len = ft_strlen(s) + 1;
@@ -110,7 +115,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr[len] = 0;
 	return (ptr);
 }
-
 
 int		get_next_line(int fd, char **line)
 {
@@ -128,45 +132,23 @@ int		get_next_line(int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 		{
 			*line = ft_substr(conteiner, 0, ft_strclen(conteiner, '\n'));
-			break;
+			break ;
 		}
 		read_len = read(fd, buff, BUFFER_SIZE);
-		if(read_len == FT_EOF)
+		if (read_len == FT_EOF)
 		{
 			ft_memset(buff, 0, ft_strlen(buff));
 			*line = ft_substr(conteiner, 0, ft_strlen(conteiner));
 			free(conteiner);
-			return(0);
+			return (0);
 		}
 	}
-
 	if (read_len == FT_EOF)
 	{
-		printf("%dakkk\n", read_len);
 		free(conteiner);
 		return (0);
 	}
 	ft_strcpy(buff, ft_strchr(buff, '\n') + 1);
 	free(conteiner);
 	return (BANANA);
-}
-
-int main (void) 
-{ 
-	char	*line;
-	int		fd;
-	int		get_next;
-	int		i;
-
-	i = 0;
-	get_next = 1;
-	fd = open("a.txt", O_RDONLY);//O_RDWR
-	while (get_next > FT_EOF)
-	{
-		get_next = get_next_line(fd, &line);
-		printf("%s\n", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
 }
