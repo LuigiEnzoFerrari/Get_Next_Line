@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 10:23:57 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 14:09:56 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,7 @@
 #include <unistd.h>
 #include <sys/resource.h>
 
-size_t	ft_strclen(const char *str, const char chr)
-{
-	unsigned int i;
-
-	i = 0;
-	while (str[i] && str[i] != chr)
-		i++;
-	return (i);
-}
-
-char	*ft_strchr(const char *str, int chr)
+static char	*ft_strchr(const char *str, int chr)
 {
 	char	c;
 
@@ -40,7 +30,7 @@ char	*ft_strchr(const char *str, int chr)
 	return (0);
 }
 
-char	*ft_strdup(const char *str)
+static char	*ft_strdup(const char *str)
 {
 	size_t	len;
 	char	*ptr;
@@ -52,13 +42,11 @@ char	*ft_strdup(const char *str)
 	return (ft_memcpy(ptr, str, len));
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ptr;
 	size_t	s_len;
-	size_t	i;
 
-	i = 0;
 	if (!s)
 		return (0);
 	s_len = ft_strlen(s) + 1;
@@ -67,16 +55,33 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ptr)
 		return (0);
-	while (s[i + start])
-	{	
-		ptr[i] = s[i + start];
-		i++;
-	}
+	ft_memcpy(ptr, (s + start), len);
 	ptr[len] = '\0';
 	return (ptr);
 }
 
-int		get_next_line(int fd, char **line)
+static int	last_returns(char **buff, char **line)
+{
+	char *temp;
+
+	if (ft_strchr(*buff, '\n'))
+	{
+		*line = ft_substr(*buff, 0, ft_strclen(*buff, '\n'));
+		if (!line)
+			return (FT_ERROR);
+		temp = ft_strjoin(ft_strdup(""), ft_strchr(*buff, '\n') + 1);
+		free(*buff);
+		*buff = temp;
+		return (FT_EOL);
+	}
+	*line = ft_substr(*buff, 0, ft_strlen(*buff));
+	if (!line)
+		return (FT_ERROR);
+	free(*buff);
+	return (FT_EOF);
+}
+
+int			get_next_line(int fd, char **line)
 {
 	static char	*buff[RLIMIT_NOFILE];
 	char		*buffer;
@@ -86,11 +91,12 @@ int		get_next_line(int fd, char **line)
 		return (FT_ERROR);
 	if (!buff[fd])
 	{
-		buff[fd] = ft_strdup("");
-		if (!buff[fd])
+		if (!(buff[fd] = ft_strdup("")))
 			return (FT_ERROR);
 	}
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (FT_ERROR);
 	while ((nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		if (nbytes < 0)
@@ -98,18 +104,8 @@ int		get_next_line(int fd, char **line)
 		buffer[nbytes] = '\0';
 		buff[fd] = ft_strjoin(buff[fd], buffer);
 		if (ft_strchr(buff[fd], '\n'))
-		{
-			free(buffer);
-			*line = ft_substr(buff[fd], 0, ft_strclen(buff[fd], '\n'));
-			if (!line)
-				return (FT_ERROR);
-			buff[fd] = ft_strjoin(ft_strdup(""), ft_strchr(buff[fd], '\n') + 1);
-			return (FT_EOL);
-		}
+			break ;
 	}
 	free(buffer);
-	*line = ft_substr(buff[fd], 0, ft_strlen(buff[fd]));
-	if (!line)
-		return (FT_ERROR);
-	return (FT_EOF);
+	return (last_returns(&buff[fd], line));
 }

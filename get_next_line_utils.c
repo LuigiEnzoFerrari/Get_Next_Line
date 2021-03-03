@@ -6,11 +6,21 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:33:58 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 10:24:43 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 13:58:19 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strclen(const char *str, const char chr)
+{
+	unsigned int i;
+
+	i = 0;
+	while (str[i] && str[i] != chr)
+		i++;
+	return (i);
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -40,26 +50,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t num)
 	return (dest);
 }
 
-int		ft_strlcpy(char *dest, const char *src, size_t len)
-{
-	unsigned int	src_len;
-
-	if (!src)
-		return (0);
-	src_len = ft_strlen(src);
-	if (len == 0)
-		return (src_len);
-	if (src_len >= len)
-	{
-		ft_memcpy(dest, src, len - 1);
-		dest[len - 1] = '\0';
-		return (src_len);
-	}
-	ft_memcpy(dest, src, src_len);
-	dest[src_len] = '\0';
-	return (src_len);
-}
-
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
 	size_t	i;
@@ -86,9 +76,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	s1_len;
 	size_t	s2_len;
 	size_t	total_len;
-	size_t	i;
 
-	i = 0;
 	s1_len = ft_strlen(s1) + 1;
 	s2_len = ft_strlen(s2);
 	total_len = s2_len + s1_len;
@@ -98,12 +86,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		free(s1);
 		return (0);
 	}
-	while (s1[i])
-	{	
-		ptr[i] = s1[i];
-		i++;
-	}
-	ptr[s1_len - 1]= '\0';
+	ft_memcpy(ptr, s1, s1_len);
+	ptr[s1_len] = '\0';
 	ft_strlcat(ptr, s2, total_len);
 	free(s1);
 	return (ptr);
