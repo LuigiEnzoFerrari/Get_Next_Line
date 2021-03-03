@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:33:58 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 13:58:19 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 14:42:23 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (0);
 	}
 	ft_memcpy(ptr, s1, s1_len);
-	ptr[s1_len] = '\0';
+	ptr[s1_len - 1] = '\0';
 	ft_strlcat(ptr, s2, total_len);
 	free(s1);
 	return (ptr);
