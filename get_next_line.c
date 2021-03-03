@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 00:54:30 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 10:23:57 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ptr;
 	size_t	s_len;
+	size_t	i;
 
+	i = 0;
 	if (!s)
 		return (0);
 	s_len = ft_strlen(s) + 1;
@@ -65,8 +67,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ptr)
 		return (0);
-	ft_strlcpy(ptr, (s + start), len + 1);
-	ptr[len] = 0;
+	while (s[i + start])
+	{	
+		ptr[i] = s[i + start];
+		i++;
+	}
+	ptr[len] = '\0';
 	return (ptr);
 }
 
