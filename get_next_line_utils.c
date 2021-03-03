@@ -6,31 +6,11 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:33:58 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 15:06:18 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 16:08:34 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int		ft_strlcpy(char *dest, const char *src, size_t len)
-{
-	unsigned int	src_len;
-
-	if (!src)
-		return (0);
-	src_len = ft_strlen(src);
-	if (len == 0)
-		return (src_len);
-	if (src_len >= len)
-	{
-		ft_memcpy(dest, src, len - 1);
-		dest[len - 1] = '\0';
-		return (src_len);
-	}
-	ft_memcpy(dest, src, src_len);
-	dest[src_len] = '\0';
-	return (src_len);
-}
 
 size_t	ft_strclen(const char *str, const char chr)
 {
@@ -68,6 +48,26 @@ void	*ft_memcpy(void *dest, const void *src, size_t num)
 		str2++;
 	}
 	return (dest);
+}
+
+int		ft_strlcpy(char *dest, const char *src, size_t len)
+{
+	unsigned int	src_len;
+
+	if (!src)
+		return (0);
+	src_len = ft_strlen(src);
+	if (len == 0)
+		return (src_len);
+	if (src_len >= len)
+	{
+		ft_memcpy(dest, src, len - 1);
+		dest[len - 1] = '\0';
+		return (src_len);
+	}
+	ft_memcpy(dest, src, src_len);
+	dest[src_len] = '\0';
+	return (src_len);
 }
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)

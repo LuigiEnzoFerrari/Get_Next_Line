@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 14:09:56 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 16:12:10 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ptr)
 		return (0);
-	ft_memcpy(ptr, (s + start), len);
+	ft_strlcpy(ptr, (s + start), len + 1);
 	ptr[len] = '\0';
 	return (ptr);
 }
