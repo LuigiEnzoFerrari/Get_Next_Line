@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:30:57 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 14:45:02 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:03:22 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "get_next_line.h"
 # include <fcntl.h>
 
+# define BUFFER_SIZE	3
 # define FT_EOL			1
 # define FT_EOF			0
 # define FT_ERROR		-1
@@ -33,5 +34,6 @@ int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strclen(const char *str, const char chr);
+int		ft_strlcpy(char *dest, const char *src, size_t len);
 
 #endif

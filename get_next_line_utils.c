@@ -6,11 +6,31 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:33:58 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 14:42:23 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:06:18 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int		ft_strlcpy(char *dest, const char *src, size_t len)
+{
+	unsigned int	src_len;
+
+	if (!src)
+		return (0);
+	src_len = ft_strlen(src);
+	if (len == 0)
+		return (src_len);
+	if (src_len >= len)
+	{
+		ft_memcpy(dest, src, len - 1);
+		dest[len - 1] = '\0';
+		return (src_len);
+	}
+	ft_memcpy(dest, src, src_len);
+	dest[src_len] = '\0';
+	return (src_len);
+}
 
 size_t	ft_strclen(const char *str, const char chr)
 {
@@ -82,13 +102,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	total_len = s2_len + s1_len;
 	ptr = (char *)malloc(sizeof(char) * (total_len));
 	if (!ptr)
-	{
-		free(s1);
 		return (0);
-	}
-	ft_memcpy(ptr, s1, s1_len);
-	ptr[s1_len - 1] = '\0';
+	ft_strlcpy(ptr, s1, s1_len);
 	ft_strlcat(ptr, s2, total_len);
-	free(s1);
 	return (ptr);
 }
