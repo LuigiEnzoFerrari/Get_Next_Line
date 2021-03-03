@@ -6,12 +6,14 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/01 13:01:41 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/02 23:41:58 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "get_next_line.h"
+#include <unistd.h>
+#include <sys/resource.h>
 
 void	*ft_memset(void *ptr, int c, size_t num)
 {
@@ -26,38 +28,6 @@ void	*ft_memset(void *ptr, int c, size_t num)
 		str++;
 	}
 	return (ptr);
-}
-
-char	*ft_strcpy(char *dest, const char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strncpy(char *dest, const char *src, size_t num)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (src[i] && i < num)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < num)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
 }
 
 size_t	ft_strclen(const char *str, const char chr)
@@ -118,40 +88,57 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 int		get_next_line(int fd, char **line)
 {
-	static char	buff[BUFFER_SIZE + 1];
-	char		*conteiner;
-	static	int	read_len;
 
-	if (BUFFER_SIZE <=0 || read_len > BUFFER_SIZE
-	|| read_len < 0 || fd < 0 || fd > FT_LIMIT_FD)
-		return (-1);
-	conteiner = ft_strdup("");
-	if (!buff[0])
-		read_len = read(fd, buff, BUFFER_SIZE);
-	while (1)
+	static char	*buff[RLIMIT_NOFILE];
+	char	*buffer;
+	int		nbytes;
+
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > RLIMIT_NOFILE)
+		return (FT_ERROR);
+	if (!buff[fd])
+		buff[fd] = ft_strdup("");
+		if (!buff[fd])
+			return (FT_ERROR);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	while ((nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		buff[read_len] = '\0';
-		conteiner = ft_strjoin(conteiner, buff);
-		if (ft_strchr(buff, '\n'))
+		if (nbytes < 0)
+			return(FT_ERROR);
+		buffer[nbytes] = '\0';
+		buff[fd] = ft_strjoin(buff[fd], buffer);
+		if (ft_strchr(buff[fd], '\n'))
 		{
-			*line = ft_substr(conteiner, 0, ft_strclen(conteiner, '\n'));
-			break ;
-		}
-		read_len = read(fd, buff, BUFFER_SIZE);
-		if (read_len == FT_EOF)
-		{
-			ft_memset(buff, 0, ft_strlen(buff));
-			*line = ft_substr(conteiner, 0, ft_strlen(conteiner));
-			free(conteiner);
-			return (0);
+			*line = ft_substr(buff[fd], 0, ft_strclen(buff[fd], '\n'));
+				if (!line)
+					return (FT_ERROR);
+			buff[fd] = ft_strjoin(ft_strdup(""), ft_strchr(buff[fd], '\n') + 1);
+			return (FT_EOL);
 		}
 	}
-	if (read_len == FT_EOF)
+	*line = ft_substr(buff[fd], 0, ft_strlen(buff[fd]));
+	if (!line)
+		return (FT_ERROR);
+	free(buffer);
+	return(FT_EOF);
+}
+
+
+int main (void) 
+{
+	char	*line;
+	int		fd;
+	int		get_next;
+	int		i;
+	
+	i = 0;
+	get_next = 1;
+	fd = open("a.txt", O_RDONLY);//O_RDWR
+	while (get_next > 0)
 	{
-		free(conteiner);
-		return (0);
+		get_next = get_next_line(fd, &line);
+		printf("%s\n", line);
+		free(line);
 	}
-	ft_strcpy(buff, ft_strchr(buff, '\n') + 1);
-	free(conteiner);
-	return (FT_EOL);
+	close(fd);
+	return (0);
 }

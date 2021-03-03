@@ -1,5 +1,15 @@
 #include "get_next_line.h"
 
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 void	*ft_memcpy(void *dest, const void *src, size_t num)
 {
 	unsigned char	*str1;
@@ -16,16 +26,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t num)
 		str2++;
 	}
 	return (dest);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
 }
 
 int		ft_strlcpy(char *dest, const char *src, size_t len)
