@@ -1,6 +1,3 @@
-AAA
-BBB
-CCC
-DDD
-EEE
-FFF
+aa
+bb
+cc
