@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:30:57 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/02 23:10:15 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 00:56:32 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdbool.h>
 # include <sys/resource.h>
 # include "get_next_line.h"
-#include <fcntl.h>
+# include <fcntl.h>
 
-# define BUFFER_SIZE	10000
+# define BUFFER_SIZE	23456
 # define FT_EOL			1
 # define FT_EOF			0
 # define FT_ERROR		-1
