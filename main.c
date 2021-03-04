@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   one.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:34:09 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 17:51:08 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 23:37:30 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "get_next_line.h"
@@ -41,7 +40,7 @@ int	main(void)
 		printf("%s\n", line);
 		free(line);
 	}
-	
+
 	// while (get_next2 > FT_EOF && get_next1 >FT_EOF)
 	// {
 	// 	get_next1 = get_next_line(fd[0], &line);

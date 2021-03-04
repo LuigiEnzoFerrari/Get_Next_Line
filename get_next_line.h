@@ -6,23 +6,22 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:30:57 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 17:50:19 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/03 23:37:37 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <stdbool.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
 # include <string.h>
-# include <stdbool.h>
 # include <sys/resource.h>
-# include "get_next_line.h"
 # include <fcntl.h>
+#include <stdio.h>
 
-# define BUFFER_SIZE	3
 # define FT_EOL			1
 # define FT_EOF			0
 # define FT_ERROR		-1

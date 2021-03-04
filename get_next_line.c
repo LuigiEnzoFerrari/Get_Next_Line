@@ -6,13 +6,22 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 20:51:26 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/04 00:48:31 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 #include <sys/resource.h>
+
+static void	ft_strdel(char **str)
+{
+	if (*str && str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+}
 
 static char	*ft_strchr(const char *str, int chr)
 {
@@ -60,23 +69,22 @@ static char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (ptr);
 }
 
-static int	last_returns(char **buff, char **line)
+static int	last_returns(int n, char **buff, char **line)
 {
 	char *temp;
 
+	if (n < 0)
+		return (FT_ERROR);
+	*line = ft_substr(*buff, 0, ft_strclen(*buff, '\n'));
+	if (!line)
+		return (FT_ERROR);
 	if (ft_strchr(*buff, '\n'))
 	{
-		*line = ft_substr(*buff, 0, ft_strclen(*buff, '\n'));
-		if (!line)
-			return (FT_ERROR);
-		temp = ft_strjoin(ft_strdup(""), ft_strchr(*buff, '\n') + 1);
+		temp = ft_strdup(ft_strchr(*buff, '\n') + 1);
 		free(*buff);
 		*buff = temp;
 		return (FT_EOL);
 	}
-	*line = ft_substr(*buff, 0, ft_strlen(*buff));
-	if (!line)
-		return (FT_ERROR);
 	free(*buff);
 	return (FT_EOF);
 }
@@ -97,13 +105,11 @@ int			get_next_line(int fd, char **line)
 		return (FT_ERROR);
 	while ((nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		if (nbytes < 0)
-			return (FT_ERROR);
 		buffer[nbytes] = '\0';
 		buff[fd] = ft_strjoin(buff[fd], buffer);
 		if (ft_strchr(buff[fd], '\n'))
 			break ;
 	}
 	free(buffer);
-	return (last_returns(&buff[fd], line));
+	return (last_returns(nbytes, &buff[fd], line));
 }
