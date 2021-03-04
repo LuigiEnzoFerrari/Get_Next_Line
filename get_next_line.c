@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/04 01:42:45 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/04 10:20:34 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	last_returns(int n, char **buff, char **line)
 	if (ft_strchr(*buff, '\n'))
 	{
 		temp = ft_strdup(ft_strchr(*buff, '\n') + 1);
-		free(*buff);
+		ft_strdel(&*buff);
 		*buff = temp;
 		return (FT_EOL);
 	}
@@ -101,6 +101,6 @@ int			get_next_line(int fd, char **line)
 		if (ft_strchr(buff[fd], '\n'))
 			break ;
 	}
-	free(buffer);
+	ft_strdel(&buffer);
 	return (last_returns(nbytes, &buff[fd], line));
 }
