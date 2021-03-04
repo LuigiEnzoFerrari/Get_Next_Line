@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:34:09 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 23:37:30 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/04 13:29:20 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	main(void)
 	{
 		get_next1 = get_next_line(fd[0], &line);
 		printf("%s\n", line);
-		free(line);
+		ft_strdel(&line);
 	}
 	while (get_next2 > FT_EOF)
 	{
 		get_next2 = get_next_line(fd[1], &line);
 		printf("%s\n", line);
-		free(line);
+		ft_strdel(&line);
 	}
 
 	// while (get_next2 > FT_EOF && get_next1 >FT_EOF)

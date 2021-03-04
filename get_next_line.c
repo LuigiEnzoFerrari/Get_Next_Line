@@ -6,13 +6,11 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/04 10:20:34 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/04 13:15:06 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <unistd.h>
-#include <sys/resource.h>
 
 static char	*ft_strchr(const char *str, int chr)
 {
@@ -76,7 +74,7 @@ static int	last_returns(int n, char **buff, char **line)
 		*buff = temp;
 		return (FT_EOL);
 	}
-	ft_strdel(&(*buff));
+	ft_strdel(&*buff);
 	return (FT_EOF);
 }
 

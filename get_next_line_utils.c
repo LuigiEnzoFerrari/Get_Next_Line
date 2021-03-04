@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:33:58 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/04 01:33:06 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/04 13:17:35 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	return (dest_len + src_len);
 }
 
-
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ptr;
@@ -118,6 +117,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	ft_strlcpy(ptr, s1, s1_len);
 	ft_strlcat(ptr, s2, total_len);
-	free(s1);
+	ft_strdel(&s1);
 	return (ptr);
 }
