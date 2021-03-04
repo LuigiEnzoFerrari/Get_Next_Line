@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:33:58 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/04 00:00:34 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/04 01:33:06 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	ft_strdel(char **str)
+{
+	if (*str && str)
+	{
+		free(*str);
+		*str = NULL;
+	}
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t num)
@@ -104,7 +113,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	ptr = (char *)malloc(sizeof(char) * (total_len));
 	if (!ptr)
 	{
-		free(s1);
+		ft_strdel(&s1);
 		return (0);	
 	}
 	ft_strlcpy(ptr, s1, s1_len);

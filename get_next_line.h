@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:30:57 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/03 23:37:37 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/03/04 01:33:14 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strclen(const char *str, const char chr);
 int		ft_strlcpy(char *dest, const char *src, size_t len);
+void	ft_strdel(char **str);
 
 #endif
