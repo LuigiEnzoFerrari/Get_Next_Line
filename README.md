@@ -1,2 +1,0 @@
-# gnltest
-just fo tests
