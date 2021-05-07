@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/05/07 18:22:48 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/05/07 18:37:24 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ int	get_next_line(int fd, char **line)
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd > RLIMIT_NOFILE || !line)
 		return (FT_ERROR);
 	if (!(buff[fd]))
-		if (!(buff[fd] = ft_strdup("")))
+	{
+		buff[fd] = ft_strdup("");
+		if (!buff[fd])
 			return (FT_ERROR);
+	}
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (FT_ERROR);
