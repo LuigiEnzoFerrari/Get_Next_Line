@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/05/07 18:37:24 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/05/07 18:39:09 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,13 @@ int	get_next_line(int fd, char **line)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (FT_ERROR);
-	while ((nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
+	while (nbytes > 0)
 	{
 		buffer[nbytes] = '\0';
 		buff[fd] = ft_strjoin(buff[fd], buffer);
 		if (ft_strchr(buff[fd], '\n'))
 			break ;
+		nbytes = read(fd, buffer, BUFFER_SIZE);
 	}
 	ft_strdel(&buffer);
 	return (last_returns(nbytes, &buff[fd], line));
