@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:33:58 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/04 14:37:48 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/05/07 18:22:20 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strclen(const char *str, const char chr)
 {
-	unsigned int i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] && str[i] != chr)
@@ -24,7 +24,7 @@ size_t	ft_strclen(const char *str, const char chr)
 
 size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])

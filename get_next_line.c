@@ -6,7 +6,7 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/03/04 14:31:49 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/05/07 18:22:48 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 static int	last_returns(int n, char **buff, char **line)
 {
-	char *temp;
+	char	*temp;
 
 	if (n < 0)
 		return (FT_ERROR);
@@ -78,7 +78,7 @@ static int	last_returns(int n, char **buff, char **line)
 	return (FT_EOF);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*buff[RLIMIT_NOFILE];
 	char		*buffer;
