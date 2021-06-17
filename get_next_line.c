@@ -6,57 +6,11 @@
 /*   By: lenzo-pe <lenzo-pe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 23:08:06 by lenzo-pe          #+#    #+#             */
-/*   Updated: 2021/05/08 02:14:42 by lenzo-pe         ###   ########.fr       */
+/*   Updated: 2021/06/16 03:37:16 by lenzo-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static char	*ft_strchr(const char *str, int chr)
-{
-	char	c;
-
-	c = (char)chr;
-	while (*str)
-	{
-		if (*str == c)
-			return ((char *)str);
-		str++;
-	}
-	if (c == 0)
-		return ((char *)str);
-	return (0);
-}
-
-static char	*ft_strdup(const char *str)
-{
-	size_t	len;
-	char	*ptr;
-
-	len = ft_strlen(str) + 1;
-	ptr = malloc(len);
-	if (!ptr)
-		return (0);
-	return (ft_memcpy(ptr, str, len));
-}
-
-static char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*ptr;
-	size_t	s_len;
-
-	if (!s)
-		return (0);
-	s_len = ft_strlen(s) + 1;
-	if (start > s_len)
-		return (ft_strdup(""));
-	ptr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!ptr)
-		return (0);
-	ft_memcpy(ptr, (s + start), len + 1);
-	ptr[len] = '\0';
-	return (ptr);
-}
 
 static int	last_returns(int n, char **buff, char **line)
 {
@@ -97,7 +51,7 @@ int	get_next_line(int fd, char **line)
 	while (nbytes > 0)
 	{
 		buffer[nbytes] = '\0';
-		buff[fd] = ft_strjoin(buff[fd], buffer);
+		buff[fd] = ft_rejoin(buff[fd], buffer);
 		if (ft_strchr(buff[fd], '\n'))
 			break ;
 		nbytes = read(fd, buffer, BUFFER_SIZE);
