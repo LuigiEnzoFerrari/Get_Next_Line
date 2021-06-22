@@ -1,6 +1,6 @@
 # GET_NEXT_LINE
 
-Esta eh uma funcao que tem como objetivo devolver uma linha allocada de um **file descriptor** no buffer **line**, e vai avancando para a proxima linha conforme a funcao eh chamada, ate o final do arquivo.
+Esta eh uma funcao que tem como objetivo allocar uma linha de um **file descriptor** no buffer **line**. A funcao vai avancando para a proxima linha conforme ela eh chamada, ate o final do arquivo.
 
 ## Como usar
 
@@ -10,7 +10,7 @@ gcc main.c -D BUFFER_SIZE=30 get_next_line.c libft.a
 ```
 #### Exemplo 1
 
-De a ela um ponteiro vazio do tipo string, e um index para um filedescriptor. Caso voce queira pega um arquivo de fora voce pode usar a funcao **open** para retornar o index **fd** do arquivo.  
+De a ela um ponteiro vazio do tipo string, e um index para um file descriptor. Caso voce queira pega um arquivo de fora voce pode usar a funcao **open** para retornar o index **fd (file descriptor)** do arquivo.  
 
 ![image1](./example.png "example 1")  
 
@@ -24,11 +24,11 @@ Voce tambem pode printar o arquivo inteiro ate fim.
 
 #### libft - functions
 
-[ft_strdup](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strdup.c "ft_strdup")
-[ft_rejoin](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_rejoin.c "ft_rejoin")
-[ft_strchr](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strchr.c "ft_strchr")
-[ft_substr](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_substr.c "ft_substr")
-[ft_strclen](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strclen.c "ft_strclen")
+[ft_strdup  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strdup.c "ft_strdup")
+[ft_rejoin  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_rejoin.c "ft_rejoin")
+[ft_strchr  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strchr.c "ft_strchr")
+[ft_substr  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_substr.c "ft_substr")
+[ft_strclen  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strclen.c "ft_strclen")
 
 ```c
 #include "get_next_line.h"
