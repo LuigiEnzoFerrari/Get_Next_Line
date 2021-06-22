@@ -24,10 +24,10 @@ Voce tambem pode printar o arquivo inteiro ate fim.
 
 #### libft - functions
 
-[ft_strdup  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strdup.c "ft_strdup")
-[ft_rejoin  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_rejoin.c "ft_rejoin")
-[ft_strchr  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strchr.c "ft_strchr")
-[ft_substr  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_substr.c "ft_substr")
+[ft_strdup  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strdup.c "ft_strdup") - 
+[ft_rejoin  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_rejoin.c "ft_rejoin") - 
+[ft_strchr  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strchr.c "ft_strchr") - 
+[ft_substr  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_substr.c "ft_substr") - 
 [ft_strclen  ](https://github.com/LuigiEnzoFerrari/42School_Libft/blob/main/string/ft_strclen.c "ft_strclen")
 
 ```c
